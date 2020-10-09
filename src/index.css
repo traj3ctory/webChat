@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Piazzolla&display=swap");
+:root {
+  --primary : #3f51b5;
+}
+
+body {
+  margin: 0;
+  font-family: "Piazzolla", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.bg-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+.bb1 {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--primary);
+  border-radius: 0;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+.bb {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--primary);
+  border-radius: 0;
+}
+.bb:focus{
+    box-shadow: none;
+    border-bottom: 1px solid var(--primary);
+    border-radius: 0;
+}
+.bg {
+  background-image: url(https://colorlib.com/etc/lf/Login_v4/images/bg-01.jpg);
+  min-height: 92.3vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
