@@ -1,11 +1,12 @@
 import { auth, firestore } from 'firebase';
+import { authConstant } from './Constants';
 
 
 export const register = (user) => {
     return async (dispatch) => {
         const db = firestore();
 
-        dispatch({ type: `$(authConstant.USER_LOGIN)_REQUEST` })
+        dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` })
 
         auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -39,15 +40,15 @@ export const register = (user) => {
                                 localStorage.setItem('user', JSON.stringify(loggedInUser));
                                 console.log('User logged in successfully ...')
                                 dispatch({
-                                    type: `$(authConstant.USER_LOGIN)_SUCCESS`,
+                                    type: `${authConstant.USER_LOGIN}_SUCCESS`,
                                     payload: { user: loggedInUser }
                                 })
                             })
                             .catch(error => {
                                 console.log(error);
                                 dispatch({
-                                    type: `$(authConstant.USER_LOGIN)_FAILURE`,
-                                    payload: { errror: error }
+                                    type: `${authConstant.USER_LOGIN}_FAILURE`,
+                                    payload: { error }
                                 });
                             })
                     });
@@ -61,7 +62,7 @@ export const register = (user) => {
 export const login = (user) => {
     return async dispatch => {
 
-        dispatch({ type: `$(authConstant.USER_LOGIN)_REQUEST` });
+        dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` });
 
         auth()
             .signInWithEmailAndPassword(user.email, user.password)
@@ -83,7 +84,7 @@ export const login = (user) => {
                 localStorage.setItem('user', JSON.stringify(loggedInUser));
 
                 dispatch({
-                    type: `$(authConstant.USER_LOGIN)_SUCCESS`,
+                    type: `${authConstant.USER_LOGIN}_SUCCESS`,
                     payload: { user: loggedInUser }
                 });
 
@@ -91,7 +92,7 @@ export const login = (user) => {
             .catch(error => {
                 console.log(error);
                 dispatch({
-                    type: `$(authConstant.USER_LOGIN)_FAILURE`,
+                    type: `${authConstant.USER_LOGIN}_FAILURE`,
                     payload: { error }
                 });
             })
@@ -105,12 +106,12 @@ export const isLoggedInUser = () => {
 
         if (user) {
             dispatch({
-                type: `$(authConstant.USER_LOGIN)_SUCCESS`,
+                type: `${authConstant.USER_LOGIN}_SUCCESS`,
                 payload: { user }
             });
         } else {
             dispatch({
-                type: `$(authConstant.USER_LOGIN_FAILURE`,
+                type: `${authConstant.USER_LOGIN_FAILURE}`,
                 payload: { error: 'Login again please' }
             });
         }

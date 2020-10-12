@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -36,12 +36,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Header() {
+export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
     const auth = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
