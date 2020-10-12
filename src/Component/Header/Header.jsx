@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,9 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
@@ -40,13 +38,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
+    const auth = useSelector(state => state.auth);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -67,7 +62,7 @@ export default function Header() {
                     <Typography variant="h6" className={classes.title}>
                         Traj3ctory
                     </Typography>
-                    {auth && (
+                    {!auth.authenticated ?
                         <div>
                             <Link to={'./login'} className={classes.Link}>
                                 <Button color="inherit" >
@@ -88,6 +83,8 @@ export default function Header() {
                             >
                                 <AccountCircle />
                             </IconButton>
+
+
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorEl}
@@ -106,14 +103,21 @@ export default function Header() {
                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                                 <MenuItem onClick={handleClose}>My account</MenuItem>
                             </Menu>
-                        </div>
-                    )}
-                    <FormGroup>
-                        <FormControlLabel
-                            control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-                            label={auth ? 'Logout' : 'Login'}
-                        />
-                    </FormGroup>
+                        </div> : null
+                    }
+
+                    {auth.authenticated ? `Hi ${auth.firstName} ${auth.lastName}` : ''}
+
+
+                    {auth.authenticated ?
+
+                        <Link to={'#'} className={classes.Link}>
+                            <Button color="inherit">
+                                Logout
+                                </Button>
+                        </Link>
+                        : null
+                    }
                 </Toolbar>
             </AppBar>
         </div>
