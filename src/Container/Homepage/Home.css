@@ -1,0 +1,11 @@
+.mssgs {
+    min-height: 60vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+.list {
+    min-height: 60vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+    font-size: 12px;
+}
