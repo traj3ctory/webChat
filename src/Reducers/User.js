@@ -1,4 +1,4 @@
-import { userConstants } from "../actions/constants"
+import { userConstants } from "../Action/Constants";
 
 const intiState = {
     users: [],

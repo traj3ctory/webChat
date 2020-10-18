@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { logout } from './../../Action/Action'
 /**
 * @author
 * @function Header
@@ -51,6 +52,10 @@ export default function Header(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    // const logout = () => {
+    //     dispatch(logout());
+    // }
 
     return (
         <div className={classes.root}>
@@ -112,7 +117,9 @@ export default function Header(props) {
 
                     {auth.authenticated ?
 
-                        <Link to={'#'} className={classes.Link}>
+                        <Link to={'#'} onClick={() => {
+                            dispatch(logout(auth.uid))
+                        }} className={classes.Link}>
                             <Button color="inherit">
                                 Logout
                                 </Button>

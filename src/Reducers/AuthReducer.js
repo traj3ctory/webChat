@@ -9,12 +9,9 @@ const initState = {
     error: null,
 }
 
-
 export default (state = initState, action) => {
 
     console.log(action);
-
-
 
     switch (action.type) {
 
@@ -42,6 +39,19 @@ export default (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+        case `${authConstant.USER_LOGOUT}_REQUEST`:
+            break;
+        case `${authConstant.USER_LOGOUT}_SUCCESS`:
+            state = {
+                ...initState
+            }
+            break;
+            case `${authConstant.USER_LOGOUT}_FAILURE`:
+                state = {
+                    ...state,
+                    error: action.payload.error
+                }
+                break;
 
     }
 
