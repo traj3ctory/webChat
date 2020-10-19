@@ -1,86 +1,28 @@
-// import React, { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { getRealtimeUsers } from './../../Action/Action';
-// import Layout from '../../Component/Layout/Layout';
-// import { Form, InputGroup, Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
-// import Button from '@material-ui/core/Button';
-// import SendIcon from '@material-ui/icons/Send';
-// import "./Home.css";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRealtimeUsers,
+  updateMessage,
+  getRealtimeConversations,
+} from "../../Action/Action";
+import Layout from "../../Component/Layout/Layout";
+import {
+  Form,
+  InputGroup,
+  Container,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+} from "react-bootstrap";
+import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
+import "./style.css";
 
-// /**
-// * @author
-// * @function Home
-// **/
-
-// const Home = (props) => {
-
-//   const {user, onClick} = props;
-
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(getRealtimeUsers)
-//   }, []);
-
-//   return (
-//     <Layout>
-//       <Container className="mt-5">
-//         <Card className="shadow-sm">
-//           <Row>
-//             <Col md="3">
-//               <Card.Body className="list">
-//                 <ListGroup variant="flush">
-//                   <ListGroup.Item><span><img src="https://avatars2.githubusercontent.com/u/55158999?s=400&u=d99b33fad6c194e331ed174e0fa418e6781f3419&v=4" className="img-fluid rounded-circle" alt="profile img" /></span>&nbsp;Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                   <ListGroup.Item>Hello World</ListGroup.Item>
-//                 </ListGroup>
-//               </Card.Body>
-//             </Col>
-//             <Col md="9">
-//               <Card.Body className="mssgs">
-//                 <InputGroup className="mb-3" style={{ position: 'fixed', bottom: '25vh', width: '100vw' }}>
-//                   <Form.Group controlId="exampleForm.ControlTextarea1">
-//                     <Form.Label className="sr-only">Example textarea</Form.Label>
-//                     <Form.Control as="textarea" rows={1} />
-//                   </Form.Group>
-//                   <InputGroup.Append>
-//                     <InputGroup.Text id="basic-addon2" className="bg-transparent border-0">
-//                       <Button
-//                         // onClick={}
-//                         variant="contained"
-//                         color="primary"
-//                         className="px-4"
-//                         endIcon={<SendIcon />}
-//                       >
-//                         Send
-//                     </Button></InputGroup.Text>
-//                   </InputGroup.Append>
-//                 </InputGroup>
-
-
-//               </Card.Body>
-//             </Col>
-//           </Row>
-//         </Card>
-//       </Container>
-//     </Layout>
-//   )
-
-// }
-
-// export default Home;
-
-import React, { useEffect, useState } from 'react';
-import './style.css';
-import Layout from '../../Component/Layout/Layout';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRealtimeUsers, updateMessage, getRealtimeConversations } from '../../Action/Action';
-
+/**
+ * @author
+ * @function Home
+ **/
 
 const User = (props) => {
 
@@ -100,7 +42,7 @@ const User = (props) => {
   );
 }
 
-const HomePage = (props) => {
+const Home = (props) => {
 
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
@@ -208,7 +150,7 @@ const HomePage = (props) => {
                   chatStarted ? 
                   user.conversations.map((con, i) =>
                     <div style={{ textAlign: con.user_uid_1 == auth.uid ? 'right' : 'left' }} key={i}>
-                    <p className="messageStyle">{con.message}</p>
+                    <p className="messageStyle" >{con.message}</p>
                   </div> )
                   : null
                 }
@@ -233,4 +175,4 @@ const HomePage = (props) => {
   );
 }
 
-export default HomePage;
+export default Home;

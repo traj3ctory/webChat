@@ -1,12 +1,14 @@
 import { auth, firestore } from 'firebase';
 import { authConstant } from './Constants';
-
+import { getRealtimeUsers } from './Users';
 
 export const register = (user) => {
 
     return async (dispatch) => {
+
         const db = firestore();
-        dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` })
+
+        dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` });
 
         auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -14,18 +16,16 @@ export const register = (user) => {
                 console.log(data);
                 const currentUser = auth().currentUser;
                 const name = `${user.firstName} ${user.lastName}`;
-
                 currentUser.updateProfile({
-
                     displayName: name
-
                 })
                     .then(() => {
 
-                        db.collection('users').add({
+                        db.collection('users')
+                        .doc(data.user.uid)
+                        .set({
                             firstName: user.firstName,
                             lastName: user.lastName,
-                            email: user.email,
                             uid: data.user.uid,
                             createdAt: new Date(),
                             isOnline: true
@@ -50,8 +50,10 @@ export const register = (user) => {
                                 dispatch({
                                     type: `${authConstant.USER_LOGIN}_FAILURE`,
                                     payload: { error }
-                                });
-                            })
+                                })
+                                
+                                ;
+                            });
                     });
             })
             .catch(error => {
@@ -122,7 +124,7 @@ export const isLoggedInUser = () => {
             });
         } else {
             dispatch({
-                type: `${authConstant.USER_LOGIN_FAILURE}`,
+                type: `${authConstant.USER_LOGIN}_FAILURE`,
                 payload: { error: 'Login again please' }
             });
         }
@@ -159,9 +161,5 @@ export const logout = (uid) => {
         .catch(error => {
             console.log(error);
         })
-
-        
-
-
     }
 }

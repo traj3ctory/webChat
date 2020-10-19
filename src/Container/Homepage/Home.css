@@ -1,11 +1,26 @@
 .mssgs {
-    min-height: 60vh;
-    max-height: 60vh;
     overflow-y: scroll;
 }
 .list {
-    min-height: 60vh;
-    max-height: 60vh;
     overflow-y: scroll;
-    font-size: 12px;
+    font-size: 14px;
+}
+.wrap{
+    min-height: 60vh;
+    max-height: 80vh;
+    /* position:fixed; */
+    margin-bottom:0;
+}
+.onlineStatus{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #16e316;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #16e316;
+    padding: 5px;
+}
+.onlineStatus.off{
+    background: red;
+    box-shadow: 0 0 0 0;
 }
