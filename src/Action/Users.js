@@ -45,7 +45,7 @@ export const updateMessage = (msgObj) => {
                 createdAt: new Date()
             })
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 //success
                 // dispatch({
                 //     type: userConstants.GET_REALTIME_MESSAGES,

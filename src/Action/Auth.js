@@ -1,6 +1,5 @@
 import { auth, firestore } from 'firebase';
 import { authConstant } from './Constants';
-import { getRealtimeUsers } from './Users';
 
 export const register = (user) => {
 

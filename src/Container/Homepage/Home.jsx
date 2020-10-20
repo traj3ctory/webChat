@@ -63,10 +63,6 @@ const Home = (props) => {
     .catch(error => {
       console.log(error);
     })
-
-    
-
-
   }, []);
 
   //console.log(user);
@@ -87,7 +83,7 @@ const Home = (props) => {
     setChatUser(`${user.firstName} ${user.lastName}`)
     setUserUid(user.uid);
 
-    console.log(user);
+    // console.log(user);
 
     dispatch(getRealtimeConversations({ uid_1: auth.uid, uid_2: user.uid }));
 
@@ -123,11 +119,11 @@ const Home = (props) => {
 
           {
             user.users.length > 0 ?
-            user.users.map(user => {
+            user.users.map((user,i) => {
               return (
                 <User 
                   onClick={initChat}
-                  key={user.uid} 
+                  key={i} 
                   user={user} 
                   />
               );
