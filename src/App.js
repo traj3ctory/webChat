@@ -18,16 +18,13 @@ function App() {
     if (!auth.authenticated){
       dispatch(isLoggedInUser())
     }
-  }, []);
+  });
 
   return (
     <div className="App">
       <Router>
           <PrivateRoute exact path="/" component={Home} />
-
-
-          
-          <Route exact path="/login" component={Login} />
+           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
       </Router>
 

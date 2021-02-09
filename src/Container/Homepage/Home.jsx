@@ -6,17 +6,6 @@ import {
   getRealtimeConversations,
 } from "../../Action/Action";
 import Layout from "../../Component/Layout/Layout";
-import {
-  Form,
-  InputGroup,
-  Container,
-  Row,
-  Col,
-  Card,
-  ListGroup,
-} from "react-bootstrap";
-import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
 import "./style.css";
 
 /**
@@ -27,18 +16,18 @@ import "./style.css";
 const User = (props) => {
 
 
-  const {user, onClick} = props;
+  const { user, onClick } = props;
 
   return (
     <div onClick={() => onClick(user)} className="displayName">
-                  <div className="displayPic">
-                      <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" alt="" />
-                  </div>
-                  <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
-                      <span style={{fontWeight: 500}}>{user.firstName} {user.lastName}</span>
-                      <span className={user.isOnline ? `onlineStatus` : `onlineStatus off`}></span>
-                  </div>
-              </div>
+      <div className="displayPic">
+        <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" alt="" />
+      </div>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between', margin: '0 10px' }}>
+        <span style={{ fontWeight: 500 }}>{user.firstName} {user.lastName}</span>
+        <span className={user.isOnline ? `onlineStatus` : `onlineStatus off`}></span>
+      </div>
+    </div>
   );
 }
 
@@ -55,15 +44,14 @@ const Home = (props) => {
 
 
   useEffect(() => {
-
     unsubscribe = dispatch(getRealtimeUsers(auth.uid))
-    .then(unsubscribe => {
-      return unsubscribe;
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }, []);
+      .then(unsubscribe => {
+        return unsubscribe;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  });
 
   //console.log(user);
 
@@ -74,7 +62,7 @@ const Home = (props) => {
       unsubscribe.then(f => f()).catch(error => console.log(error));
 
     }
-  }, []);
+  });
 
 
   const initChat = (user) => {
@@ -98,11 +86,11 @@ const Home = (props) => {
     }
 
 
-    if(message !== ""){
+    if (message !== "") {
       dispatch(updateMessage(msgObj))
-      .then(() => {
-        setMessage('')
-      });
+        .then(() => {
+          setMessage('')
+        });
     }
 
     //console.log(msgObj);
@@ -119,55 +107,55 @@ const Home = (props) => {
 
           {
             user.users.length > 0 ?
-            user.users.map((user,i) => {
-              return (
-                <User 
-                  onClick={initChat}
-                  key={i} 
-                  user={user} 
+              user.users.map((user, i) => {
+                return (
+                  <User
+                    onClick={initChat}
+                    key={i}
+                    user={user}
                   />
-              );
-            }) : null
+                );
+              }) : null
           }
 
-            
-                    
+
+
         </div>
 
         <div className="chatArea">
-            
-            <div className="chatHeader"> 
+
+          <div className="chatHeader">
             {
               chatStarted ? chatUser : ''
             }
-            </div>
-            <div className="messageSections">
-                {
-                  chatStarted ? 
-                  user.conversations.map((con, i) =>
-                    <div style={{ textAlign: con.user_uid_1 == auth.uid ? 'right' : 'left' }} key={i}>
-                    <p className="messageStyle" >{con.message}</p>
-                  </div> )
-                  : null
-                }
-                
-
-            </div>
+          </div>
+          <div className="messageSections">
             {
-              chatStarted ? 
+              chatStarted ?
+                user.conversations.map((con, i) =>
+                  <div style={{ textAlign: con.user_uid_1 === auth.uid ? 'right' : 'left' }} key={i}>
+                    <p className="messageStyle" >{con.message}</p>
+                  </div>)
+                : null
+            }
+
+
+          </div>
+          {
+            chatStarted ?
               <div className="chatControls">
-                <textarea 
+                <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Write Message"
                 />
                 <button onClick={submitMessage}>Send</button>
-            </div> : null
-            }
-            
+              </div> : null
+          }
+
         </div>
-    </section>
-  </Layout>
+      </section>
+    </Layout>
   );
 }
 

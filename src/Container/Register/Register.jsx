@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Layout from '../../Component/Layout/Layout';
-import { Container, InputGroup, Form, FormControl, Card, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, InputGroup, Form, FormControl, Card, Row, Col } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 
